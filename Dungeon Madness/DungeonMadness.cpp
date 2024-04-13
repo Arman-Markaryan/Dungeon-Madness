@@ -41,14 +41,15 @@ int main() {
     if (lore) {
         std::string backstory = "You were attacked by the Goblin Crew while traveling through the Dark Forest. When you were attacked, you were badly injured, causing you to stumble and fall into a deep cave. Your left arm is badly injured, so you cannot move it, and your body is fatigued and dirty.\n"; 
         typewriterEffect(backstory, 60
-); 
+    ); 
     } else {
         std::string backstoryskip = "You've chosen to skip learning about what happened prior to the Incident.\n";
         typewriterEffect(backstoryskip, 60
-); 
+    );
     }
 
-    // Continue with the rest of the game logic...
+    std::string NarratorOne =   "Rise from your slumber, " + characterName + " the shadows of this cave conceal hungry dwellers eager for prey. You cannot linger here; danger lurks in every shadow.\n";
+    typewriterEffect (NarratorOne, 60);
 
     return 0;
 }
