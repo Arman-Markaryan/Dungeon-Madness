@@ -1,76 +1,90 @@
 #include <iostream>
 #include <string>
-#include <chrono>
 #include <thread>
+#include <chrono>
+#include <vector>
 
-// Makes typewriter format operate
 void typewriterEffect(const std::string& text, int delayMs) {
-    for (char c : text) {
+    for (auto c : text) {
         std::cout << c;
         std::cout.flush();
         std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
     }
 }
 
-// Function to display text with a delay between characters
-void displayTextWithDelay(const std::string& text, int delayMs) {
-    for (char character : text) {
-        std::cout << character;
-        std::cout.flush();
-        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
-    }
-}
-
 int main() {
-    std::string characterName;
     std::string userAnswer;
-    bool lore = true;
+    bool lore = false;
+    bool wake = false;
 
-    // Tells the player to input their name before they start the game
-    std::string beforejourney = "Before you begin your dungeon journey, what is your name?: ";
-    typewriterEffect(beforejourney, 60);
-    std::cin >> characterName;  
-    
-    std::string YourName = "Your character name is " + characterName + ",";
-    int delayMilliseconds = 50; 
-    displayTextWithDelay(YourName, delayMilliseconds);
+    std::string incidentPrompt = "Before you begin, are you interested in delving into the events prior to the Incident? (yes/no): ";
+    typewriterEffect(incidentPrompt, 60);
 
-    // Welcome message for the player
-    std::string welcome = " Welcome to Dungeon Madness, Good luck on your journey.\n";
-    typewriterEffect(welcome, 60);
 
-    // Ask the user if they want to learn about lore before their character is hurt
-    std::string incident = "Interested in delving into the events prior to the Incident? (yes/no): ";
-    typewriterEffect(incident, 60); 
-    std::cin >> userAnswer;
+    auto isValidInput = [](const std::string& input) {
+        return (input == "yes" || input == "y" || input == "no" || input == "n" ||
+                input == "wake" || input == "slumber");
+    };
+
+
+    do {
+        std::cin >> userAnswer;
+    } while (!isValidInput(userAnswer));
 
     if (userAnswer == "yes" || userAnswer == "y") {
         lore = true;
-    } if (userAnswer == "no" || userAnswer == "n") {
-        lore = false;
     }
 
-    // Display the backstory with typewriter effect if the player chooses to learn about lore
     if (lore) {
-        std::string backstory = "You were attacked by the Goblin Crew while traveling through the Dark Forest. When you were attacked, you were badly injured, causing you to stumble and fall into a deep cave. Your left arm is badly injured, so you cannot move it, and your body is fatigued and dirty.\n"; 
-        typewriterEffect(backstory, 60
-    ); 
+        std::string loreText = "You were attacked by the Goblin Crew while traveling through the Dark Forest. When you were attacked, you were badly injured, causing you to stumble and fall into a deep cave. Your left arm is badly injured, so you cannot move it, and your body is fatigued and dirty.\n";
+        typewriterEffect(loreText, 60);
     } else {
-        std::string backstoryskip = "You've chosen to skip learning about what happened prior to the Incident.\n";
-        typewriterEffect(backstoryskip, 60
-    );
+        std::string skipLoreText = "You've chosen to skip learning about what happened prior to the Incident.\n";
+        typewriterEffect(skipLoreText, 60);
     }
 
-    std::string NarratorOne =   "Rise from your slumber, " + characterName + " the shadows of this cave conceal hungry dwellers eager for prey. You cannot linger here; danger lurks in every shadow.\n";
-    typewriterEffect (NarratorOne, 60);
 
-    std::string typewriter = "Would you like to wake up or continue your slumber?";
-    typewriterEffect (typewriter, 60);
+    std::string wakePrompt = "Would you like to wake up or continue your slumber? (wake/slumber): ";
+    typewriterEffect(wakePrompt, 60);
 
-    
+    do {
+        std::cin >> userAnswer;
+    } while (!isValidInput(userAnswer));
+
+    if (userAnswer == "wake") {
+        wake = true;
+    }
+
+    if (wake) {
+        std::string wakeText = "You slowly start picking yourself up, realizing the condition your body is in. As you look around the deep cave, you hear sounds of screeching.\n";
+        typewriterEffect(wakeText, 60);
 
 
+        std::string itemDescription = "After looking around the area, you spot several items thrown across the cave floor\n";
+        typewriterEffect(itemDescription, 60);
 
+        std::vector<std::string> items = { "unlit torch", "lighter", "dagger", "x2 bandages" };
+
+        std::cout << "Items found in the cave:" << std::endl;
+        for (const auto& item : items) {
+            std::cout << "- " << item << std::endl;
+        }
+
+
+        std::string dialogue1 = "The cave speaks to you: 'Hello there, traveler. It seems you're another victim of the Goblin Crew.\n";
+        typewriterEffect(dialogue1, 60);
+
+        std::string dialogue2 = "Who's there!? Come out of the shadows!\n";
+        typewriterEffect(dialogue2, 60);
+
+        std::string eerieDescription = "\e[3mA human skull tumbles from a concealed pile of decomposed corpses lurking in the shadows. The gruesome sight is barely discernible amidst the darkness.\e[0m\n";
+        typewriterEffect(eerieDescription, 60);
+    } else {
+        std::string death1 = "You failed to wake up in time, resulting in the cave dwellers finding you and killing you.";
+        typewriterEffect(death1, 60);
+        std::cout << "\e[3mYou Died\e[0m\n" << std::endl;
+        return 0;
+    }
 
     return 0;
 }
