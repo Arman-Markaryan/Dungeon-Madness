@@ -7,7 +7,16 @@
 void typewriterEffect(const std::string& text, int delayMs) {
     for (char c : text) {
         std::cout << c;
-        std::cout.flush(); // Flush output to ensure immediate display
+        std::cout.flush();
+        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    }
+}
+
+// Function to display text with a delay between characters
+void displayTextWithDelay(const std::string& text, int delayMs) {
+    for (char character : text) {
+        std::cout << character;
+        std::cout.flush();
         std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
     }
 }
@@ -20,10 +29,14 @@ int main() {
     // Tells the player to input their name before they start the game
     std::string beforejourney = "Before you begin your dungeon journey, what is your name?: ";
     typewriterEffect(beforejourney, 60);
-    std::cin >> characterName;    
+    std::cin >> characterName;  
+    
+    std::string YourName = "Your character name is " + characterName + ",";
+    int delayMilliseconds = 50; 
+    displayTextWithDelay(YourName, delayMilliseconds);
 
     // Welcome message for the player
-    std::string welcome = "Welcome to Dungeon Madness, " + characterName + " Good luck on your journey.\n";
+    std::string welcome = " Welcome to Dungeon Madness, Good luck on your journey.\n";
     typewriterEffect(welcome, 60);
 
     // Ask the user if they want to learn about lore before their character is hurt
@@ -50,6 +63,14 @@ int main() {
 
     std::string NarratorOne =   "Rise from your slumber, " + characterName + " the shadows of this cave conceal hungry dwellers eager for prey. You cannot linger here; danger lurks in every shadow.\n";
     typewriterEffect (NarratorOne, 60);
+
+    std::string typewriter = "Would you like to wake up or continue your slumber?";
+    typewriterEffect (typewriter, 60);
+
+    
+
+
+
 
     return 0;
 }
