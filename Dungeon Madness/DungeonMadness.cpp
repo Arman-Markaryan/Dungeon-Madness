@@ -77,7 +77,7 @@ int main() {
         std::string dialogue2 = "Who's there!? Come out of the shadows!\n";
         typewriterEffect(dialogue2, 60);
 
-        std::string eerieDescription = "\e[3mA human skull tumbles from a concealed pile of decomposed corpses lurking in the shadows. The gruesome sight is barely discernible amidst the darkness.\e[0m\n";
+        std::string eerieDescription = "\e[3mA human skull tumbles from a concealed pile of decomposed corpses lurking in the shadows. The gruesome sight is barely noticeable amidst the darkness.\e[0m\n";
         typewriterEffect(eerieDescription, 60);
     } else {
         std::string death1 = "You failed to wake up in time, resulting in the cave dwellers finding you and killing you.";
