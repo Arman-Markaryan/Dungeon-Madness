@@ -17,7 +17,7 @@ int main() {
     bool lore = false;
     bool wake = false;
 
-    std::string incidentPrompt = "Before you begin, are you interested in delving into the events prior to the Incident? (yes/no): ";
+    std::string incidentPrompt = "(LORE) - Before you begin, are you interested in delving into the events prior to the Incident? (yes/no): ";
     typewriterEffect(incidentPrompt, 60);
 
 
@@ -29,7 +29,7 @@ int main() {
 
     do {
         std::cin >> userAnswer;
-    } while (!isValidInput(userAnswer));
+    } while (isValidInput(userAnswer));
 
     if (userAnswer == "yes" || userAnswer == "y") {
         lore = true;
@@ -49,7 +49,7 @@ int main() {
 
     do {
         std::cin >> userAnswer;
-    } while (!isValidInput(userAnswer));
+    } while (isValidInput(userAnswer));
 
     if (userAnswer == "wake") {
         wake = true;
