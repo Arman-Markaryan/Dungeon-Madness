@@ -71,7 +71,7 @@ int main() {
         }
 
 
-        std::string dialogue1 = "The cave speaks to you: 'Hello there, traveler. It seems you're another victim of the Goblin Crew.\n";
+        std::string dialogue1 = "The cave speaks to you: Hello there, traveler. It seems you're another victim of the Goblin Crew.\n";
         typewriterEffect(dialogue1, 60);
 
         std::string dialogue2 = "Who's there!? Come out of the shadows!\n";
