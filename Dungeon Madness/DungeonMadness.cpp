@@ -29,7 +29,7 @@ int main() {
 
     do {
         std::cin >> userAnswer;
-    } while (isValidInput(userAnswer));
+    } while (!isValidInput(userAnswer));
 
     if (userAnswer == "yes" || userAnswer == "y") {
         lore = true;
@@ -49,7 +49,7 @@ int main() {
 
     do {
         std::cin >> userAnswer;
-    } while (isValidInput(userAnswer));
+    } while (!isValidInput(userAnswer));
 
     if (userAnswer == "wake") {
         wake = true;
